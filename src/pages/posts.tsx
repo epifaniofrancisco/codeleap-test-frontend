@@ -3,6 +3,7 @@ import { useUserStore } from "@/store/user-store";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 import { CreatePostForm } from "@/components/create-post-form";
+import { PostList } from "./post-list";
 
 export default function PostsPage() {
 	const { clearUsername } = useUserStore();
@@ -32,6 +33,8 @@ export default function PostsPage() {
                 </header>
                 
                 <CreatePostForm />
+
+                <PostList />
 			</section>
 		</main>
 	);
