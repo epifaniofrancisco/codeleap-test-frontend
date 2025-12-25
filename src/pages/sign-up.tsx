@@ -5,14 +5,12 @@ import { useUserStore } from "@/store/user-store";
 import {
 	Card,
 	CardContent,
-	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { FieldError } from "@/components/ui/field";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 
 const signupSchema = z.object({
 	username: z
@@ -42,26 +40,29 @@ export default function SignupPage() {
 	const isFormValid = form.formState.isValid && usernameValue?.trim();
 
 	return (
-		<main className="flex items-center justify-center min-h-screen bg-[#DDDDDD] px-4">
-			<Card className="w-full max-w-125 border-[#CCCCCC] shadow-xl">
+		<main className="flex justify-center items-center bg-background px-4 min-h-screen">
+			<Card className="shadow-xl border-[#CCCCCC] w-full max-w-125">
 				<CardHeader className="gap-0">
-					<CardTitle className="text-[22px] font-bold">
+					<CardTitle className="font-bold text-[22px]">
 						Welcome to CodeLeap network!
 					</CardTitle>
 				</CardHeader>
-				<CardContent className="space-y-2">
+				<CardContent>
 					<form onSubmit={form.handleSubmit(onSubmit)}>
 						<Controller
 							name="username"
 							control={form.control}
 							render={({ field, fieldState }) => (
-								<div className="space-y-2">
-									<Label
+								<Field
+									data-invalid={fieldState.invalid}
+									className="gap-2"
+								>
+									<FieldLabel
 										htmlFor="username"
-										className="text-base font-normal"
+										className="m-0 font-normal text-base"
 									>
 										Please enter your username
-									</Label>
+									</FieldLabel>
 									<Input
 										{...field}
 										id="username"
@@ -71,7 +72,7 @@ export default function SignupPage() {
 										className={
 											fieldState.error && field.value
 												? "border-red-500 focus-visible:ring-[1px] focus-visible:ring-red-500"
-												: "border-[#777777] focus-visible:ring-1"
+												: "border-input-border focus-visible:ring-1"
 										}
 									/>
 									{fieldState.invalid && field.value && (
@@ -79,20 +80,21 @@ export default function SignupPage() {
 											errors={[fieldState.error]}
 										/>
 									)}
-								</div>
+								</Field>
 							)}
 						/>
+
+						<div className="flex justify-end mt-4">
+							<Button
+								type="submit"
+								disabled={!isFormValid}
+								className="bg-primary hover:bg-primary/90 disabled:bg-gray-300 px-8 h-8 font-bold disabled:text-gray-500 text-base cursor-pointer disabled:cursor-not-allowed"
+							>
+								ENTER
+							</Button>
+						</div>
 					</form>
 				</CardContent>
-				<CardFooter className="flex justify-end">
-					<Button
-						type="submit"
-						disabled={!isFormValid}
-						className="bg-[#7695EC] hover:bg-[#7695EC]/90 cursor-pointer disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed font-bold h-8 px-8 text-base"
-					>
-						ENTER
-					</Button>
-				</CardFooter>
 			</Card>
 		</main>
 	);

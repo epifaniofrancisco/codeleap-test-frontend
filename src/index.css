@@ -121,3 +121,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+@theme {
+  --color-primary: #7695EC;
+  --color-background: #DDDDDD;
+  --color-input-border: #777777;
+  --color-card-border: #999999;
+}
