@@ -5,14 +5,16 @@ import type { Post } from "@/types";
 import { formatDate } from "@/utils";
 import { EditPostModal } from "./edit-post-modal";
 import { useState } from "react";
+import { DeletePostModal } from "./delete-post-modal";
 
 interface PostCardProps {
 	post: Post;
 }
 
 export const PostCard = ({ post }: PostCardProps) => {
-    const currentUsername = useUserStore((state) => state.username);
-    const [showEditModal, setShowEditModal] = useState(false);
+	const currentUsername = useUserStore((state) => state.username);
+	const [showEditModal, setShowEditModal] = useState(false);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const isOwner = currentUsername === post.username;
 
@@ -27,7 +29,9 @@ export const PostCard = ({ post }: PostCardProps) => {
 					{isOwner && (
 						<div className="flex gap-5">
 							<Button
-								onClick={() => {}}
+								onClick={() => {
+									setShowDeleteModal(true);
+								}}
 								className="p-0 w-8 h-8 cursor-pointer"
 								aria-label="Delete post"
 							>
@@ -39,7 +43,9 @@ export const PostCard = ({ post }: PostCardProps) => {
 							</Button>
 
 							<Button
-								onClick={() => {setShowEditModal(true);}}
+								onClick={() => {
+									setShowEditModal(true);
+								}}
 								className="p-0 w-8 h-8 cursor-pointer"
 								aria-label="Edit post"
 							>
@@ -63,14 +69,21 @@ export const PostCard = ({ post }: PostCardProps) => {
 						{post.content}
 					</p>
 				</CardContent>
-            </Card>
-            
-            {showEditModal && (
-                <EditPostModal
-                    post={post}
-                    onClose={() => setShowEditModal(false)}
-                />
-            )}
+			</Card>
+
+			{showEditModal && (
+				<EditPostModal
+					post={post}
+					onClose={() => setShowEditModal(false)}
+				/>
+			)}
+
+			{showDeleteModal && (
+				<DeletePostModal
+					postId={post.id}
+					onClose={() => setShowDeleteModal(false)}
+				/>
+			)}
 		</>
 	);
 };
