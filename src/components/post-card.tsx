@@ -6,6 +6,7 @@ import { formatDate } from "@/utils";
 import { EditPostModal } from "./edit-post-modal";
 import { useState } from "react";
 import { DeletePostModal } from "./delete-post-modal";
+import { LikeButton } from "./like-button";
 
 interface PostCardProps {
 	post: Post;
@@ -64,10 +65,11 @@ export const PostCard = ({ post }: PostCardProps) => {
 						<span className="font-bold">@{post.username}</span>
 						<span>{formatDate(post.created_datetime)}</span>
 					</div>
-
 					<p className="text-gray-800 text-base wrap-break-word whitespace-pre-wrap">
 						{post.content}
 					</p>
+
+					<LikeButton postId={post.id} />
 				</CardContent>
 			</Card>
 
