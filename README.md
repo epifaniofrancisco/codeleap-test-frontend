@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# CodeLeap Test Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Uma aplicação web desenvolvida em React + TypeScript para a CodeLeap, com gerenciamento de posts, comentários, curtidas e autenticação simples de usuário.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Cadastro de usuário (nickname):** Permite que o usuário se identifique para acessar a plataforma.
+- **Listagem de posts com rolagem infinita:** Exibe os posts em uma lista dinâmica, carregando mais conforme o usuário rola a página.
+- **Criação de posts:** Usuários autenticados podem criar novos posts com título e conteúdo.
+- **Edição e exclusão de posts:** Usuários podem editar ou excluir seus próprios posts.
+- **Curtidas em posts:** Permite curtir e descurtir posts, exibindo o total de curtidas.
+- **Comentários em posts:** Usuários podem comentar em qualquer post e visualizar todos os comentários.
+- **Menções:** Usuários podem mencionar outros usuários que já criaram posts na plataforma. 
+- **Filtros e busca por usuário:** Possibilita filtrar posts por autor e buscar posts por texto.
+- **Logout:** O usuário pode sair da aplicação a qualquer momento.
 
-## React Compiler
+## Tecnologias Utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- [React 19](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vitejs.dev/)
+- [Zustand](https://zustand-demo.pmnd.rs/)
+- [React Hook Form](https://react-hook-form.com/)
+- [Zod](https://zod.dev/)
+- [TanStack React Query](https://tanstack.com/query/latest)
+- [Radix UI](https://www.radix-ui.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Axios](https://axios-http.com/)
 
-## Expanding the ESLint configuration
+## Instalação e Uso
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/epifaniofrancisco/codeleap-test-frontend.git
+   cd codeleap-test-frontend
+   ```
+2. **Instale as dependências:**
+   ```bash
+   pnpm install
+   ```
+3. **Inicie o servidor de desenvolvimento:**
+   ```bash
+   pnpm dev
+   ```
+4. Acesse [http://localhost:5173](http://localhost:5173) no navegador.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Estrutura do Projeto
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- `src/pages/` — Páginas principais (SignUp, Posts, Lista de Posts)
+- `src/components/` — Componentes reutilizáveis (cards, botões, formulários, modais)
+- `src/hooks/` — Hooks customizados (ex: rolagem infinita, posts)
+- `src/services/` — Integração com API
+- `src/store/` — Gerenciamento de estado global (usuário, likes, comentários)
+- `src/types/` — Tipos TypeScript
+- `src/utils/` — Funções utilitárias
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Como funciona
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. O usuário informa um nome de usuário para acessar a rede.
+2. Pode criar, editar, excluir e curtir posts.
+3. Pode comentar nos posts e visualizar comentários.
+4. Pode filtrar posts por usuário e buscar por texto.
+5. Logout disponível a qualquer momento.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Licença
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Este projeto é apenas para fins de teste técnico.
