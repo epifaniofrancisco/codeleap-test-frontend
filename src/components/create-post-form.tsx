@@ -136,7 +136,7 @@ export const CreatePostForm = () => {
 						<Button
 							type="submit"
 							disabled={!isFormValid || isPending}
-							className="bg-primary hover:bg-primary/90 disabled:bg-gray-300 px-8 font-bold disabled:text-gray-500 disabled:cursor-not-allowed"
+							className="bg-primary hover:bg-primary/90 cursor-pointer disabled:bg-gray-300 px-8 font-bold disabled:text-gray-500 disabled:cursor-not-allowed"
 						>
 							{isPending ? "Creating..." : "Create"}
 						</Button>
