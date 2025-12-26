@@ -7,12 +7,14 @@ import { EditPostModal } from "./edit-post-modal";
 import { useState } from "react";
 import { DeletePostModal } from "./delete-post-modal";
 import { LikeButton } from "./like-button";
+import { MentionText } from "./mention-text";
 
 interface PostCardProps {
 	post: Post;
+	allUsernames: string[];
 }
 
-export const PostCard = ({ post }: PostCardProps) => {
+export const PostCard = ({ post, allUsernames }: PostCardProps) => {
 	const currentUsername = useUserStore((state) => state.username);
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -66,7 +68,10 @@ export const PostCard = ({ post }: PostCardProps) => {
 						<span>{formatDate(post.created_datetime)}</span>
 					</div>
 					<p className="text-gray-800 text-base wrap-break-word whitespace-pre-wrap">
-						{post.content}
+						<MentionText
+							text={post.content}
+							validUsernames={allUsernames}
+						/>
 					</p>
 
 					<LikeButton postId={post.id} />

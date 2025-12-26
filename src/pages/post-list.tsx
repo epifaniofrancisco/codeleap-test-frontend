@@ -8,6 +8,10 @@ export const PostList = () => {
 
 	const postsData: Post[] = posts?.results || [];
 
+	const allUsernames = Array.from(
+		new Set(postsData?.map((post: { username: string; }) => post.username) || [])
+	);
+
 	if (isLoading) {
 		return (
 			<div className="flex justify-center items-center py-12">
@@ -39,7 +43,7 @@ export const PostList = () => {
 	return (
 		<div className="space-y-6">
 			{postsData.map((post) => (
-				<PostCard key={post.id} post={post} />
+				<PostCard key={post.id} post={post} allUsernames={allUsernames} />
 			))}
 		</div>
 	);
