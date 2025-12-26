@@ -5,7 +5,8 @@ interface LikesState {
 	globalLikes: Record<number, Set<string>>;
 	toggleLike: (postId: number, username: string) => void;
 	getLikeCount: (postId: number) => number;
-	hasUserLiked: (postId: number, username: string) => boolean;
+    hasUserLiked: (postId: number, username: string) => boolean;
+    removeLikesByPostId: (postId: number) => void;
 }
 
 export const useLikesStore = create<LikesState>()(
@@ -37,6 +38,14 @@ export const useLikesStore = create<LikesState>()(
 			hasUserLiked: (postId: number, username: string) => {
 				const postLikes = get().globalLikes[postId];
 				return postLikes ? postLikes.has(username) : false;
+			},
+
+			removeLikesByPostId: (postId: number) => {
+				set((state) => {
+					const newGlobalLikes = { ...state.globalLikes };
+					delete newGlobalLikes[postId];
+					return { globalLikes: newGlobalLikes };
+				});
 			},
 		}),
 		{

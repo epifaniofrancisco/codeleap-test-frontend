@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useCommentsStore } from "@/store/comment-store";
+import { useLikesStore } from "@/store/post-likes-store";
 
 interface DeleteModalProps {
 	postId: number;
@@ -24,6 +25,7 @@ export const DeletePostModal = ({ postId, onClose }: DeleteModalProps) => {
 			},
 		});
 		useCommentsStore.getState().removeCommentsByPostId(postId);
+		useLikesStore.getState().removeLikesByPostId(postId);
 	};
 
 	return (
