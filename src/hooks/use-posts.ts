@@ -1,11 +1,13 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
 import { postsApi } from "../services/api";
-import type { CreatePostDto, UpdatePostDto } from "@/types/index";
+import type { CreatePostDto, PostsResponse, UpdatePostDto } from "@/types/index";
 
-export const usePosts = () => {
-	return useQuery({
+export const useInfinitePosts = () => {
+	return useInfiniteQuery<PostsResponse, Error>({
 		queryKey: ["posts"],
 		queryFn: postsApi.getPosts,
+		getNextPageParam: (lastPage) => lastPage?.next,
+		initialPageParam: "",
 	});
 };
 

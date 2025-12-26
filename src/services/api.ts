@@ -1,5 +1,10 @@
 import axios from "axios";
-import type { Post, CreatePostDto, UpdatePostDto } from "@/types/index";
+import type {
+	Post,
+	CreatePostDto,
+	UpdatePostDto,
+	PostsResponse,
+} from "@/types/index";
 
 const API_BASE_URL = "https://dev.codeleap.co.uk/careers/";
 
@@ -11,7 +16,7 @@ const api = axios.create({
 });
 
 export const postsApi = {
-	getPosts: async (): Promise<{ results: Post[] }> => {
+	getPosts: async (): Promise<PostsResponse> => {
 		const { data } = await api.get("");
 		return data;
 	},

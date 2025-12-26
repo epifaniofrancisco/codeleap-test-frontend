@@ -33,3 +33,10 @@ export interface CreateCommentDto {
 	username: string;
 	content: string;
 }
+
+export type PostsResponse = {
+	count: number;
+	next: string | null;
+	previous: string | null;
+	results: Post[];
+};
