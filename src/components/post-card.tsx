@@ -8,6 +8,7 @@ import { useState } from "react";
 import { DeletePostModal } from "./delete-post-modal";
 import { LikeButton } from "./like-button";
 import { MentionText } from "./mention-text";
+import { CommentsSection, CommentsSectionButton } from "./comment-section";
 
 interface PostCardProps {
 	post: Post;
@@ -18,6 +19,7 @@ export const PostCard = ({ post, allUsernames }: PostCardProps) => {
 	const currentUsername = useUserStore((state) => state.username);
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [showComments, setShowComments] = useState(false);
 
 	const isOwner = currentUsername === post.username;
 
@@ -74,7 +76,20 @@ export const PostCard = ({ post, allUsernames }: PostCardProps) => {
 						/>
 					</p>
 
-					<LikeButton postId={post.id} />
+					<div className="flex gap-1">
+						<LikeButton postId={post.id} />
+						<CommentsSectionButton
+							postId={post.id}
+							showComments={showComments}
+							setShowComments={setShowComments}
+						/>
+					</div>
+
+					<CommentsSection
+						postId={post.id}
+						allUsernames={allUsernames}
+						showComments={showComments}
+					/>
 				</CardContent>
 			</Card>
 

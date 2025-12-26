@@ -7,6 +7,7 @@ import {
 	DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { useCommentsStore } from "@/store/comment-store";
 
 interface DeleteModalProps {
 	postId: number;
@@ -22,6 +23,7 @@ export const DeletePostModal = ({ postId, onClose }: DeleteModalProps) => {
 				onClose();
 			},
 		});
+		useCommentsStore.getState().removeCommentsByPostId(postId);
 	};
 
 	return (
